@@ -1,0 +1,57 @@
+.first-color { 
+	background: #eff7d3; 
+}
+	
+.second-color { 
+	background: #cedcc3; 
+}
+
+.third-color { 
+	background: #a7b99e; 
+}
+
+.fourth-color { 
+	background: #535a3b; 
+}
+
+.content {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.content.show {
+  display: flex;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.tab-btn {
+  width: 100%;
+  border: none;
+  color: black;
+  background: #eff7d3;
+  border-radius: 8px 8px 0px 0px;
+  font-weight: bold;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.tab-btn:hover {
+  background: #cedcc3;
+  transition: all 0.2s ease;
+}
+
+.btn-content {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+

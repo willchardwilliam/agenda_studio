@@ -9,12 +9,49 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="src/styles/style.css" />
     <title>Agenda Studio</title>
   </head>
   <body>
-    <section class="container">
-      <form>
+    <header>
+      <nav class="tab-buttons">
+        <button class="tab-btn" content-id="agenda">Agenda</button>
+        <button class="tab-btn" content-id="clientes">Clientes</button>
+        <button class="tab-btn" content-id="servicos">Serviços</button>
+        <button class="tab-btn" content-id="profissionais">
+          Profissionais
+        </button>
+        <button class="tab-btn" content-id="relatorio">Relatório</button>
+      </nav>
+    </header>
+    <main class="tab-contents">
+      <div class="content show" id="agenda">
+        <h1>Agenda</h1>
+      </div>
+
+      <div class="content clientes" id="clientes">
+        <h1>Clientes</h1>
+
+        <button class="btn-content" id="btn-initFormCliente">Cadastrar Cliente</button>
+        <ul class="lista-clientes" data-listaCliente="">
+        </ul>
+      </div>
+
+      <div class="content" id="servicos">
+        <h1>Serviços</h1>
+      </div>
+
+      <div class="content" id="profissionais">
+        <h1>Profissionais</h1>
+      </div>
+
+      <div class="content" id="relatorio">
+        <h1>Relatório</h1>
+      </div>
+    </main>
+
+    <section class="container" data-clientesCadastro>
+      <form id="cadastroCliente">
         <button type="button" class="fechar">X</button>
         <h1>Cadastro de Clientes</h1>
         <fieldset>
@@ -59,6 +96,8 @@
           <button type="submit" id="cadastrar">Cadastrar</button>
         </fieldset>
       </form>
+      <div id="mensagem"></div>
     </section>
+    <script src="./src/javascript/script.js" type="module"></script>
   </body>
 </html>

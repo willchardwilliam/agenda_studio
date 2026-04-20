@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 62.5%;
+  background: #535a3b;
+
+}
+
+.lista-clientes {
+  list-style: none;
+  margin: 10px 0 0 0;
+  padding: 0;
+}
+
+.lista-clientes li {
+  background: #fff;
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 5px;
+  margin-top: 1px;
+}
+
+
+
