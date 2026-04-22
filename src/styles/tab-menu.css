@@ -16,8 +16,9 @@
 
 .tab-buttons {
   display: flex;
+  max-width: 100%;
   gap: 6px;
-  margin-top: 10px;
+  padding: 4px 4px 0px 4px;
 }
 
 .tab-btn {
@@ -26,6 +27,7 @@
   color: black;
   background: #eff7d3;
   border-radius: 8px 8px 0px 0px;
+  font-size: 10px;
   font-weight: bold;
   padding: 8px;
   cursor: pointer;

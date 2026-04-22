@@ -7,30 +7,34 @@
 body {
   font-size: 62.5%;
   background: #535a3b;
-
 }
 
 .lista-clientes {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  list-style: none;
-  margin: 10px 0 0 0;
   padding: 0;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
-.lista-clientes li {
-  display: flex;
-  justify-content: space-between;
+.lista-clientes div{
+  border: 2px solid black;
   background: #fff;
   border-radius: 4px;
   font-size: 16px;
   padding: 5px;
   margin-top: 1px;
+}
+.lista-clientes div button {
+  padding: 5px 10px 5px 10px;
   cursor: pointer;
+  border-radius: 4px;
+}
+.lista-clientes div button:hover {
+  transform: scale(1.03);
+  transition: 0.2s ease;
 }
 
-.lista-clientes li:hover {
+.lista-clientes div:hover {
   background: #f2f2f2;
 }
 
@@ -39,6 +43,16 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+.content button {
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin: 4px;
+}
+
+.content button:hover {
+  transform: scale(1.02);
+  transition: 0.2s ease;
 }
 
 .content.show {

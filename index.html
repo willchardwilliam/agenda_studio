@@ -19,19 +19,54 @@
       </nav>
     </header>
     <main class="tab-contents">
-      <div class="content show" id="agenda">
+      <div class="content" id="agenda">
         <h1>Agenda</h1>
       </div>
 
-      <div class="content clientes" id="clientes">
-        <h1>Clientes</h1>
-        <div>
-          <button class="btn-content" id="btn-initFormCliente">Cadastrar Cliente</button>
-          
-        </div>
-        <ul class="lista-clientes" data-listaCliente="">
-        </ul>
-      </div>
+      <section class="content show clientes" id="clientes">
+        <button id="abrirCadastro">Cadastro</button>
+        <section class="container" data-clientesCadastro>
+          <form id="cadastroCliente">
+            <h1>Cadastro de Clientes</h1>
+            <fieldset>
+              <legend>Informações pessoais</legend>
+              <input
+                id="nomeCompleto"
+                name="nome"
+                type="text"
+                pattern=".*\s+.*"
+                required
+                aria-required="true"
+                placeholder="Nome e Sobrenome"
+                title="Digite nome e sobrenome."
+              />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="E-mail"
+                required
+                aria-required="true"
+              />
+              <input
+                id="telefone"
+                name="telefone"
+                type="tel"
+                placeholder="Telefone somente números"
+                title="Digite apenas números."
+                inputmode="tel"
+                pattern="[0-9]{10,11}"
+                maxlength="11"
+                required
+                aria-required="true"
+              />
+
+              <button type="submit" id="cadastrar">Cadastrar</button>
+            </fieldset>
+          </form>
+        </section>
+        <div class="lista-clientes" data-listaCliente=""></div>
+      </section>
 
       <div class="content" id="servicos">
         <h1>Serviços</h1>
@@ -46,53 +81,6 @@
       </div>
     </main>
 
-    <section class="container" data-clientesCadastro>
-      <form id="cadastroCliente">
-        <button type="button" class="fechar">X</button>
-        <h1>Cadastro de Clientes</h1>
-        <fieldset>
-          <legend>Informações pessoais</legend>
-
-          <label for="nomeCompleto">Nome Completo:</label>
-          <input
-            id="nomeCompleto"
-            name="nome"
-            type="text"
-            pattern=".*\s+.*"
-            required
-            aria-required="true"
-            placeholder="Nome e Sobrenome"
-            title="Digite nome e sobrenome."
-          />
-
-          <label for="email">E-mail:</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="E-mail"
-            required
-            aria-required="true"
-          />
-
-          <label for="telefone">Telefone:</label>
-          <input
-            id="telefone"
-            name="telefone"
-            type="tel"
-            placeholder="Telefone somente números"
-            title="Digite apenas números."
-            inputmode="tel"
-            pattern="[0-9]{10,11}"
-            maxlength="11"
-            required
-            aria-required="true"
-          />
-
-          <button type="submit" id="cadastrar">Cadastrar</button>
-        </fieldset>
-      </form>
-    </section>
     <script src="./src/javascript/script.js" type="module"></script>
   </body>
 </html>

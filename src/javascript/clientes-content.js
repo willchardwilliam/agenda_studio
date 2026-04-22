@@ -1,39 +1,17 @@
 export default function initClientesContent() {
 
-  const sectionForm = document.querySelector(
-    "[data-clientesCadastro]",
-  );
-
-  function formCliente() {
-    const btnAbrirForm = document.getElementById("btn-initFormCliente");
-    
-    const btnFecharForm = document.querySelector(".fechar");
-    
-    // remove a classe ao clique externo ao form
-    sectionForm.addEventListener("click", (event) => {
-      if (event.target === sectionForm) {
-        sectionForm.classList.remove("show");
-      }
-    });
-
-    // remove a classe ao clique
-    btnFecharForm.addEventListener("click", () => {
-      sectionForm.classList.remove("show");
-    });
-
-    // adiciona a classe ao clique
-    btnAbrirForm.addEventListener("click", () => {
-      sectionForm.classList.add("show");
-    });
-  }
-  formCliente();
-
   const form = document.getElementById("cadastroCliente");
   const lista = document.querySelector("[data-listaCliente]");
-
+  const sectionForm = document.querySelector('[data-clientesCadastro]');
+  const btnAbrirCadastro = document.getElementById("abrirCadastro");
+  
+  function handleCadastro() {
+    sectionForm.classList.toggle("ativo");
+  }
+  
+  btnAbrirCadastro.addEventListener('click', handleCadastro);
   // verifica se existe em localstorage, se não, cria um array vazio
   let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
-  console.log(clientes);
 
   // carrega a lista ao carregar a página
   window.addEventListener("load", renderizar);
@@ -45,10 +23,12 @@ export default function initClientesContent() {
 
     clientes.forEach((cliente, index) => {
       // cria um elemento de lista
-      const item = document.createElement("li");
+      const item = document.createElement("div");
       item.classList.add("itemLista");
       item.innerHTML = `
-      <p>${cliente.nome} - ${cliente.telefone}</p>
+      <p>Nome: ${cliente.nome}</p>
+      <p>E-mail: ${cliente.email}</p>
+      <p>Telefone: ${cliente.telefone}</p>
       <button class="btn-excluir" data-index="${index}">Excluir</button>
       `;
       item.querySelector(".btn-excluir").addEventListener("click", excluirItem)
