@@ -6,7 +6,8 @@ export default function initClientesContent() {
     listaClientes: document.querySelector("[data-listaCliente]"),
     btnAbrirCadastro: document.getElementById("abrirCadastro"),
     btnSalvar: document.getElementById("salvarAlteracoes"),
-    btnSubmit: document.getElementById("cadastrar")
+    btnSubmit: document.getElementById("cadastrar"),
+    btnCancelar: document.getElementById("cancelar")
   }
 
   const form = {
@@ -18,18 +19,28 @@ export default function initClientesContent() {
 
   function handleCadastro() {
     dom.sectionForm.classList.toggle("ativo");
-    dom.btnSalvar.style.display = "none";
   }
   
+  dom.btnCancelar.addEventListener('click', () => {
+    dom.btnSubmit.style.display = "flex"
+    dom.btnCancelar.style.display = "none"
+    dom.btnSalvar.style.display = "none"
+    form.telefone.readOnly = false
+    dom.formCliente.reset()
+  })
+
   dom.btnAbrirCadastro.addEventListener('click', handleCadastro);
   // verifica se existe em localstorage, se não, cria um array vazio
   let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
   // carrega a lista ao carregar a página
   window.addEventListener("load", renderizar);
+  
+  
 
   // função exibe lista
-  function renderizar() {
+  function renderizar(event) {
+    
     // limpa a lista antes de renderizar
     dom.listaClientes.innerHTML = "";
 
@@ -61,10 +72,14 @@ export default function initClientesContent() {
       item.querySelector(".btn-editar").addEventListener('click', editarRegistro);
       dom.listaClientes.appendChild(item);
     });
+
   };
+  
+
   function editarRegistro(event) {
-    dom.btnSubmit.style.display = "none";
-    dom.btnSalvar.style.display = "flex";
+    dom.btnSubmit.style.display = "none"
+    dom.btnSalvar.style.display = "flex"
+    dom.btnCancelar.style.display = "flex"
     
     const idUnico = Number(event.target.dataset.index)
     const clienteParaEditar = clientes.find(c => c.id === idUnico);
@@ -74,13 +89,31 @@ export default function initClientesContent() {
       form.nome.value = clienteParaEditar.nome;
       form.email.value = clienteParaEditar.email;
       form.telefone.value = clienteParaEditar.phone;
+      form.telefone.readOnly = true
 
       dom.sectionForm.classList.add("ativo");
     } else {
-      alert("Erro ao encontrar ID de cliente!");
+      msg("Erro ao encontrar ID de registro!")
       return;
     }
   }
+
+  dom.btnSalvar.addEventListener('click', salvarAlteracoes)
+  function salvarAlteracoes() {
+    const idCliente = Number(form.id.value)
+    const clientesEditados = clientes.map(cliente => {
+      if (cliente.id === idCliente) {
+        return {...cliente, nome: form.nome.value, email: form.email.value }
+      }
+      return cliente
+    })
+    clientes = clientesEditados
+    localStorage.setItem("clientes", JSON.stringify(clientes))
+    msg("Cadastro editado com sucesso!")
+    renderizar()
+    dom.formCliente.reset()
+  }
+  
   function excluirItem(event) {
     const idUnico = Number(event.target.dataset.index);
 
@@ -92,12 +125,13 @@ export default function initClientesContent() {
 
   // função mensagem
   function msg(msg) {
-    const div = document.createElement("div");
+    const div = document.createElement("div")
+    div.classList.add("msgForm")
     div.innerText = msg
     dom.sectionForm.appendChild(div);
     setTimeout(() => {
       div.style.display = 'none';
-    }, 1500)
+    }, 2000)
   }
 
   function cadastrar(event) {

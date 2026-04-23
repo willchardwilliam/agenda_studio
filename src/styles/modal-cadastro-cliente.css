@@ -56,7 +56,7 @@ form fieldset {
   padding: 4px;
 }
 
-.container div {
+.msgForm {
   position: absolute;
   z-index: 2500;
   padding: 5px;
@@ -66,4 +66,16 @@ form fieldset {
   box-shadow: 5px 10px 25px black;
   font-size: 1.3rem;
   font-weight: bold;
+}
+
+#salvarAlteracoes {
+  display: none;
+}
+
+#cancelar {
+  display: none;
+}
+
+.formButtons {
+  display: flex;
 }
