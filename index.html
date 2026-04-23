@@ -30,6 +30,7 @@
             <h1>Cadastro de Clientes</h1>
             <fieldset>
               <legend>Informações pessoais</legend>
+              <input type="hidden" id="registroId" name="registroId" value="">
               <input
                 id="nomeCompleto"
                 name="nome"
@@ -62,10 +63,11 @@
               />
 
               <button type="submit" id="cadastrar">Cadastrar</button>
+              <button type="button" id="salvarAlteracoes">Salvar Alterações</button>
             </fieldset>
           </form>
         </section>
-        <div class="lista-clientes" data-listaCliente=""></div>
+        <ul class="lista-clientes" data-listaCliente=""></ul>
       </section>
 
       <div class="content" id="servicos">

@@ -1,15 +1,27 @@
 export default function initClientesContent() {
 
-  const form = document.getElementById("cadastroCliente");
-  const lista = document.querySelector("[data-listaCliente]");
-  const sectionForm = document.querySelector('[data-clientesCadastro]');
-  const btnAbrirCadastro = document.getElementById("abrirCadastro");
-  
+  const dom = {
+    formCliente: document.getElementById("cadastroCliente"),
+    sectionForm: document.querySelector('[data-clientesCadastro]'),
+    listaClientes: document.querySelector("[data-listaCliente]"),
+    btnAbrirCadastro: document.getElementById("abrirCadastro"),
+    btnSalvar: document.getElementById("salvarAlteracoes"),
+    btnSubmit: document.getElementById("cadastrar")
+  }
+
+  const form = {
+    id: document.getElementById("registroId"),
+    nome: document.getElementById("nomeCompleto"),
+    email: document.getElementById("email"),
+    telefone: document.getElementById("telefone")
+  }
+
   function handleCadastro() {
-    sectionForm.classList.toggle("ativo");
+    dom.sectionForm.classList.toggle("ativo");
+    dom.btnSalvar.style.display = "none";
   }
   
-  btnAbrirCadastro.addEventListener('click', handleCadastro);
+  dom.btnAbrirCadastro.addEventListener('click', handleCadastro);
   // verifica se existe em localstorage, se não, cria um array vazio
   let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
@@ -19,46 +31,70 @@ export default function initClientesContent() {
   // função exibe lista
   function renderizar() {
     // limpa a lista antes de renderizar
-    lista.innerHTML = "";
+    dom.listaClientes.innerHTML = "";
 
-    clientes.forEach((cliente, index) => {
+    clientes.forEach((cliente) => {
       // cria um elemento de lista
-      const item = document.createElement("div");
+      const item = document.createElement("li");
+      const p1 = document.createElement("p");
+      const p2 = document.createElement("p");
+      const p3 = document.createElement("p");
+      const btnExcluir = document.createElement("button");
+      const btnEditar = document.createElement("button");
+
+      p1.innerText = `Nome: ${cliente.nome}`;
+      p2.innerText = `E-mail: ${cliente.email}`;
+      p3.innerText = `Telefone: ${cliente.phone}`;
+
+      btnExcluir.innerText  = "Excluir";
+      btnExcluir.classList.add("btn-excluir");
       item.classList.add("itemLista");
+
       item.innerHTML = `
       <p>Nome: ${cliente.nome}</p>
       <p>E-mail: ${cliente.email}</p>
-      <p>Telefone: ${cliente.telefone}</p>
-      <button class="btn-excluir" data-index="${index}">Excluir</button>
+      <p>Telefone: ${cliente.phone}</p>
+      <button class="btn-excluir" data-index="${cliente.id}">Excluir</button>
+      <button class="btn-editar" data-index="${cliente.id}">Editar</button>
       `;
-      item.querySelector(".btn-excluir").addEventListener("click", excluirItem)
-      lista.appendChild(item);
+      item.querySelector(".btn-excluir").addEventListener("click", excluirItem);
+      item.querySelector(".btn-editar").addEventListener('click', editarRegistro);
+      dom.listaClientes.appendChild(item);
     });
   };
+  function editarRegistro(event) {
+    dom.btnSubmit.style.display = "none";
+    dom.btnSalvar.style.display = "flex";
+    
+    const idUnico = Number(event.target.dataset.index)
+    const clienteParaEditar = clientes.find(c => c.id === idUnico);
 
+    if (clienteParaEditar) {
+      form.id.value = clienteParaEditar.id;
+      form.nome.value = clienteParaEditar.nome;
+      form.email.value = clienteParaEditar.email;
+      form.telefone.value = clienteParaEditar.phone;
+
+      dom.sectionForm.classList.add("ativo");
+    } else {
+      alert("Erro ao encontrar ID de cliente!");
+      return;
+    }
+  }
   function excluirItem(event) {
-    const index = event.target.dataset.index;
-    clientes.splice(index, 1);
+    const idUnico = Number(event.target.dataset.index);
+
+    clientes = clientes.filter(item => item.id !== idUnico)
+
     localStorage.setItem('clientes', JSON.stringify(clientes));
     renderizar();
   }
 
-  // função mensagem quando o cadastro é bem sucedido
-  function msgCadastrou() {
+  // função mensagem
+  function msg(msg) {
     const div = document.createElement("div");
-    div.innerText = "Cliente cadastrado com sucesso!"
-    sectionForm.appendChild(div);
-    setTimeout(() => {
-      div.style.display = 'none';
-    }, 1500)
-  }
-
-  // função mesnsagem quando cliente existe
-  function msgClienteExiste() {
-    const div = document.createElement("div");
-    div.innerText = "Cliente Existente!";
-    div.style.color = "red";
-    sectionForm.appendChild(div);
+    div.innerText = msg
+    dom.sectionForm.appendChild(div);
     setTimeout(() => {
       div.style.display = 'none';
     }, 1500)
@@ -68,26 +104,26 @@ export default function initClientesContent() {
     // não carregar a página
     event.preventDefault();
     
-    // converte os dados do formulário em objeto
-    const formData = new FormData(form);
-    const cliente = Object.fromEntries(formData);
-
-    // verifica se exixte um número de telefone igual
-    if (!clientes.some(u => u.telefone === cliente.telefone)) {
-      clientes.push(cliente);
-      localStorage.setItem("clientes", JSON.stringify(clientes));
-      msgCadastrou();
-    } else {
-      msgClienteExiste();
-    }
-
-    renderizar();
-
-    form.reset();
+    // captura os valores no momento do clique
+    const novoCliente = {
+      id: Date.now(),
+      nome: form.nome.value,
+      email: form.email.value,
+      phone: form.telefone.value
+    }  
     
+    // verifica se exixte um número de telefone igual
+    if (!clientes.some(u => u.phone === novoCliente.phone)) {
+      clientes.push(novoCliente);
+      msg("Cadastro bem sucedido!");
+    } else {
+      msg("Número de telefone existente");
+      return; // para não limpar o form e nem renderizar à toa
+    }
+    localStorage.setItem("clientes", JSON.stringify(clientes));
+    renderizar();
+    form.reset();
   }
 
-  form.addEventListener('submit', cadastrar);
-
-
+  dom.formCliente.addEventListener('submit', cadastrar);
 }

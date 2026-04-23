@@ -16,7 +16,7 @@ body {
   overflow-y: auto;
 }
 
-.lista-clientes div{
+.lista-clientes li{
   border: 2px solid black;
   background: #fff;
   border-radius: 4px;
@@ -24,17 +24,17 @@ body {
   padding: 5px;
   margin-top: 1px;
 }
-.lista-clientes div button {
+.lista-clientes li button {
   padding: 5px 10px 5px 10px;
   cursor: pointer;
   border-radius: 4px;
 }
-.lista-clientes div button:hover {
+.lista-clientes li button:hover {
   transform: scale(1.03);
   transition: 0.2s ease;
 }
 
-.lista-clientes div:hover {
+.lista-clientes li:hover {
   background: #f2f2f2;
 }
 
