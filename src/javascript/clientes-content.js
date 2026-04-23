@@ -122,7 +122,7 @@ export default function initClientesContent() {
     }
     localStorage.setItem("clientes", JSON.stringify(clientes));
     renderizar();
-    form.reset();
+    dom.formCliente.reset();
   }
 
   dom.formCliente.addEventListener('submit', cadastrar);
