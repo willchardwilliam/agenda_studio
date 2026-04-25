@@ -24,13 +24,14 @@
       </div>
 
       <section class="content show clientes" id="clientes">
-        <button id="abrirCadastro">Cadastro</button>
+        <button id="abrirCadastro">Cadastrar Cliente</button>
         <section class="container" data-clientesCadastro>
           <form id="cadastroCliente">
+            <button id="fecharCadastroCliente" type="button">X</button>
             <h1>Cadastro de Clientes</h1>
             <fieldset>
               <legend>Informações pessoais</legend>
-              <input type="hidden" id="registroId" name="registroId" value="">
+              <input type="hidden" id="id" name="id" value="">
               <input
                 id="nomeCompleto"
                 name="nome"
@@ -68,6 +69,7 @@
               </div>
             </fieldset>
           </form>
+          <div class="divMsg"></div>
         </section>
         <ul class="lista-clientes" data-listaCliente=""></ul>
       </section>

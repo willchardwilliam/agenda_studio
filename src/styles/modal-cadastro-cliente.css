@@ -10,11 +10,18 @@
   display: flex;
 }
 
+#fecharCadastroCliente {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  font-size: 1rem;
+}
+
 form {
   background: white;
   padding: 4px;
   border: 2px solid black;
-  border-radius: 2px;
+  border-radius: 4px;
   width: 100%;
   position: relative;
 }
