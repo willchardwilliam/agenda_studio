@@ -67,6 +67,7 @@ export default function initClientes() {
 
     if (resposta === true) {
       removerCliente(id)
+      mostrarMensagem(dom.sectionForm, "Cliente excluido com sucesso!")
     } else {
       return
     }
