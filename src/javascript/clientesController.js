@@ -67,7 +67,7 @@ export default function initClientes() {
 
     if (resposta === true) {
       removerCliente(id)
-      mostrarMensagem(dom.sectionForm, "Cliente excluido com sucesso!")
+      mostrarMensagem(dom.divMsg, "Cliente excluido com sucesso!")
     } else {
       return
     }
@@ -118,9 +118,9 @@ export default function initClientes() {
     
     try {
       adicionarCliente(cliente)
-      mostrarMensagem(dom.sectionForm, "Cliente cadastrado")
+      mostrarMensagem(dom.divMsg, "Cliente cadastrado")
     } catch (err) {
-      mostrarMensagem(dom.sectionForm, err.mensage)
+      mostrarMensagem(dom.divMsg, err.mensage)
     }
     
     form.formCliente.reset()
@@ -148,7 +148,7 @@ export default function initClientes() {
 
     renderizar()
 
-    mostrarMensagem(dom.sectionForm, "Cliente atualizado!")
+    mostrarMensagem(dom.divMsg, "Cliente atualizado!")
   }
 
   dom.btnSalvar.addEventListener("click", salvarDadosAtualizados)

@@ -8,22 +8,27 @@
   </head>
   <body>
     <header>
-      <nav class="tab-buttons">
-        <button class="tab-btn" content-id="agenda">Agenda</button>
-        <button class="tab-btn" content-id="clientes">Clientes</button>
-        <button class="tab-btn" content-id="servicos">Serviços</button>
-        <button class="tab-btn" content-id="profissionais">
-          Profissionais
-        </button>
-        <button class="tab-btn" content-id="relatorio">Relatório</button>
+      <nav>
+        <label class="mobile-menu">
+          <input id="checkbox-menu" type="checkbox" />
+          <span class="bar"></span>
+        </label>
+        <ul class="nav-list js-tabmenu">
+          <li><a href="#agenda" >Agenda</a></li>
+          <li><a href="#clientes" >Clientes</a></li>
+          <li><a href="#servicos" >Servicos</a></li>
+          <li><a href="#profissionais" >Profissionais</a></li>
+          <li><a href="#relatorio" >Relatório</a></li>
+        </ul>
+        <a class="logo" href="#">Agenda Studio</a>
       </nav>
     </header>
-    <main class="tab-contents">
-      <div class="content" id="agenda">
+    <main class="js-tabcontent">
+      <section class="content">
         <h1>Agenda</h1>
-      </div>
+      </section>
 
-      <section class="content show clientes" id="clientes">
+      <section class="content clientes show">
         <button id="abrirCadastro">Cadastrar Cliente</button>
         <section class="container" data-clientesCadastro>
           <form id="cadastroCliente">
@@ -69,24 +74,24 @@
               </div>
             </fieldset>
           </form>
-          <div class="divMsg"></div>
+          <div></div>
+          <div class="divMsg">texto</div>
         </section>
         <ul class="lista-clientes" data-listaCliente=""></ul>
       </section>
 
-      <div class="content" id="servicos">
+      <section class="content">
         <h1>Serviços</h1>
-      </div>
+      </section>
 
-      <div class="content" id="profissionais">
+      <section class="content">
         <h1>Profissionais</h1>
-      </div>
+      </section>
 
-      <div class="content" id="relatorio">
+      <section class="content">
         <h1>Relatório</h1>
-      </div>
+      </section>
     </main>
-
     <script src="./src/javascript/script.js" type="module"></script>
   </body>
 </html>

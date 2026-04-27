@@ -1,15 +1,19 @@
 export default function initTabMenu() {
-  const tabs = document.querySelectorAll(".tab-btn");
 
-  tabs.forEach((tab) => tab.addEventListener("click", () => tabClicked(tab)));
-
-  const tabClicked = (tab) => {
-    const contents = document.querySelectorAll(".content");
-
-    contents.forEach((content) => content.classList.remove("show"));
-
-    const contentId = tab.getAttribute("content-id");
-    const content = document.getElementById(contentId);
-    content.classList.add("show");
-  };
 }
+
+const tabMenu = document.querySelectorAll(".js-tabmenu li")
+const tabContent = document.querySelectorAll(".js-tabcontent>section")
+
+function activeTab(index) {
+  tabContent.forEach((section) => {
+    section.classList.remove("show")
+  })
+  tabContent[index].classList.add("show")
+}
+
+tabMenu.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    activeTab(index)
+  })
+})

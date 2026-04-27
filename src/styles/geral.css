@@ -1,14 +1,17 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
 }
 
 body {
-  font-size: 62.5%;
   background: #535a3b;
+  box-sizing: border-box;
 }
 
+main {
+  height: 92vh;
+}
 .lista-clientes {
   padding: 0;
   width: 100%;

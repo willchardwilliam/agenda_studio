@@ -18,13 +18,10 @@ export function limparLista(lista) {
 }
 
 export function mostrarMensagem(container, texto) {
-  const msg = document.createElement("div")
-  msg.classList.add("msgForm")
-  msg.innerText = texto
+  container.innerText = texto
+  container.classList.add("ativo")
 
-  container.appendChild(msg)
-
-  setTimeout(() => {
-    msg.remove()
+  setTimeout(() =>{
+    container.classList.remove = "ativo"
   }, 2000)
 }

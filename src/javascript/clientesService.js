@@ -25,13 +25,6 @@ export function removerCliente(id) {
 }
 
 export function atualizarCliente(id, dadosAtualizados) {
-  clientes = clientes.map(cliente => {
-    if (cliente.id === Number(id)) {
-      console.log("cliente encontrado")
-      return { ...cliente, ...dadosAtualizados }
-    }
-    return cliente
-  })
-  
+  clientes = clientes.map(cliente => (cliente.id === Number(id))  ? { ...cliente, ...dadosAtualizados } : cliente)
   salvarClientes()
 }
