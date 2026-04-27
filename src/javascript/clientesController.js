@@ -1,3 +1,5 @@
+import { nanoid } from '../../node_modules/nanoid/nanoid.js'
+
 import {
   getClientes,
   adicionarCliente,
@@ -8,7 +10,8 @@ import {
 import {
   criarElelementoCliente,
   limparLista,
-  mostrarMensagem
+  mostrarMensagem,
+  renderCliente
 } from "./clienteUI.js"
 
 export const dom = {
@@ -78,7 +81,7 @@ export default function initClientes() {
 
     if (!btn || !btn.dataset.id) return
 
-    const id = Number(btn.dataset.id)
+    const id = btn.dataset.id
 
     if (btn.classList.contains("btn-excluir")) {
       confirmar(id)
@@ -101,16 +104,20 @@ export default function initClientes() {
     limparLista(dom.listaClientes)
 
     getClientes().forEach(cliente => {
-      const el = criarElelementoCliente(cliente)
-      dom.listaClientes.appendChild(el)
+      const el = renderCliente(cliente)
+      console.log(el)
+      dom.listaClientes.innerHTML = el
     })
   }
 
   function cadastrar(e) {
     e.preventDefault()
     
+    const idCliente = nanoid()
+
+
     const cliente = {
-      id: Date.now(),
+      id: idCliente,
       nome: form.nome.value,
       email: form.email.value,
       telefone: form.telefone.value

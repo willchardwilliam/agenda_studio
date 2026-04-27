@@ -12,6 +12,31 @@ body {
 main {
   height: 92vh;
 }
+
+
+
+.divMsg {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2500;
+  padding: 20px;
+  background: #fff;
+  border: 2px solid black;
+  border-radius: 10px;
+  box-shadow: 5px 10px 25px black;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.divMsg.ativo {
+  display: flex;
+}
+
 .lista-clientes {
   padding: 0;
   width: 100%;
