@@ -1,3 +1,5 @@
+import { renderizar } from './clienteUI.js'
+
 let clientes = JSON.parse(localStorage.getItem("clientes")) || []
 
 export function getClientes() {
@@ -6,6 +8,7 @@ export function getClientes() {
 
 export function salvarClientes() {
   localStorage.setItem("clientes", JSON.stringify(clientes))
+  renderizar()
 }
 
 export function adicionarCliente(cliente) {
@@ -25,6 +28,8 @@ export function removerCliente(id) {
 }
 
 export function atualizarCliente(id, dadosAtualizados) {
-  clientes = clientes.map(cliente => (cliente.id === Number(id))  ? { ...cliente, ...dadosAtualizados } : cliente)
+  console.log(id, dadosAtualizados)
+  clientes = clientes.map(cliente => (cliente.id === id)  ? { ...cliente, ...dadosAtualizados } : cliente)
+  console.log(clientes)
   salvarClientes()
 }

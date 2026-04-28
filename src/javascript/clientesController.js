@@ -8,39 +8,20 @@ import {
 } from "./clientesService.js"
 
 import {
-  criarElelementoCliente,
+  renderizar,
   limparLista,
   mostrarMensagem,
-  renderCliente
+  renderCliente,
+  dom,
+  form,
+  cancelarEdicao,
+  mostrarBotoesEdicao
 } from "./clienteUI.js"
 
-export const dom = {
-  sectionForm: document.querySelector('[data-clientesCadastro]'),
-  listaClientes: document.querySelector("[data-listaCliente]"),
-  btnAbrirCadastro: document.getElementById("abrirCadastro"),
-  btnSalvar: document.getElementById("salvarAlteracoes"),
-  btnSubmit: document.getElementById("cadastrar"),
-  btnCancelar: document.getElementById("cancelar"),
-  btnFechar: document.getElementById("fecharCadastroCliente"),
-  divMsg: document.querySelector(".divMsg")
-}
 
-const form = {
-  formCliente: document.getElementById("cadastroCliente"),
-  id: document.getElementById("id"),
-  nome: document.getElementById("nomeCompleto"),
-  email: document.getElementById("email"),
-  telefone: document.getElementById("telefone")
-}
 export default function initClientes() {
 
   renderizar()
-
-  function mostrarBotoesEdicao() {
-    dom.btnCancelar.style.display = "flex"
-    dom.btnSalvar.style.display = "flex"
-    dom.btnSubmit.style.display = "none"
-  }
 
   function abrirFormCadastro() {
     dom.sectionForm.classList.add("ativo")
@@ -51,11 +32,7 @@ export default function initClientes() {
   }
   
   dom.btnCancelar.addEventListener('click', () => {
-    dom.btnSubmit.style.display = "flex"
-    dom.btnCancelar.style.display = "none"
-    dom.btnSalvar.style.display = "none"
-    form.telefone.readOnly = false
-    form.formCliente.reset()
+    cancelarEdicao()
   })
 
   dom.btnFechar.addEventListener('click', () => {
@@ -92,23 +69,14 @@ export default function initClientes() {
       const cliente = getClientes().find(c => c.id === id)
 
       if (!cliente) return
-      preencherFormulario(cliente)
       abrirFormCadastro()
+      preencherFormulario(cliente)
       mostrarBotoesEdicao()
     }
   }
 
   dom.listaClientes.addEventListener("click", handleEventLista)
 
-  function renderizar() {
-    limparLista(dom.listaClientes)
-
-    getClientes().forEach(cliente => {
-      const el = renderCliente(cliente)
-      console.log(el)
-      dom.listaClientes.innerHTML = el
-    })
-  }
 
   function cadastrar(e) {
     e.preventDefault()
@@ -131,7 +99,6 @@ export default function initClientes() {
     }
     
     form.formCliente.reset()
-    renderizar()
   }
 
   function preencherFormulario(cliente) {
@@ -147,13 +114,13 @@ export default function initClientes() {
     const formData = new FormData(formulario)
     const dadosAtualizados = Object.fromEntries(formData.entries())
 
-    const id = Number(dadosAtualizados.id)
+    // console.log(dadosAtualizados)
 
-    delete dadosAtualizados.id
+    const id = dadosAtualizados.id
+
+    
 
     atualizarCliente(id, dadosAtualizados)
-
-    renderizar()
 
     mostrarMensagem(dom.divMsg, "Cliente atualizado!")
   }
